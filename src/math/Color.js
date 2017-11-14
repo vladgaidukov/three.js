@@ -314,9 +314,21 @@ Color.prototype = {
 
 	getHex: function () {
 
-		return ( this.r * 255 ) << 16 ^ ( this.g * 255 ) << 8 ^ ( this.b * 255 ) << 0;
+		function getByte( v ) {
+
+			var b = Math.floor( v * 255.0 );
+			if ( b > 255 )
+				b = 255;
+			if ( b < 0 )
+				b = 0;
+			return b;
+
+		}
+
+	    return ( getByte( this.r ) << 16 ) | ( getByte( this.g ) << 8 ) | getByte( this.b );
 
 	},
+
 
 	getHexString: function () {
 
